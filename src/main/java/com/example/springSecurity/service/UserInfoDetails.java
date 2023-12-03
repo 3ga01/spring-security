@@ -21,7 +21,6 @@ public class UserInfoDetails implements UserDetails {
         password = user.getPassword();
         authorities = Arrays.stream(user.getRoles().split(","))
                 .filter(role -> !role.isEmpty())
-                .peek(role -> System.out.println("Role: " + role))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }

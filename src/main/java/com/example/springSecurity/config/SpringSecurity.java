@@ -1,6 +1,7 @@
 package com.example.springSecurity.config;
 
 import com.example.springSecurity.service.UserDetailSvc;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,11 +18,14 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SpringSecurity {
+
+    private UserDetailSvc userDetailSvc;
 
     @Bean
     public UserDetailsService userDetailsService(){
-        return new UserDetailSvc();
+        return userDetailSvc;
     }
 
     @Bean
