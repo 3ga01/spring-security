@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -23,16 +24,25 @@ public class UserController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @GetMapping("/login")
+    public ModelAndView getLogin(){
+        return new ModelAndView("login");
+    }
     @GetMapping("/welcome")
     public String homepage(){
         return "welcome";
+    }
+
+    @GetMapping("/success")
+    public String success(){
+        return "success";
     }
 
     @GetMapping("/fail")
     public String fail(){
         return "login failed";
     }
-    @GetMapping("/users")
+    @GetMapping("/user/users")
     public ResponseEntity<?>getAllUsers(){
         List<User> users = userRepository.findAll();
         if (users.size() > 0 ){

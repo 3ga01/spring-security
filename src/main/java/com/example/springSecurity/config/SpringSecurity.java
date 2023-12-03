@@ -30,18 +30,20 @@ public class SpringSecurity {
                 .csrf(AbstractHttpConfigurer::disable)
 
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/welcome","/users").permitAll()
+                        .requestMatchers("/welcome").permitAll()
 
-                        .requestMatchers("/user/**").hasAnyAuthority("USER")
-                        .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/user/**").hasAnyAuthority("ROLE_USER")
+                        .requestMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
 
                         .anyRequest().authenticated()
                 )
                 .formLogin(form-> form
                         .loginPage("/login")
                         .loginProcessingUrl("/processLogin")
-                        .defaultSuccessUrl("/welcome")
+                        .defaultSuccessUrl("/success")
                         .failureUrl("/fail")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
                         .permitAll()
                 )
                 .authenticationProvider(authenticationProvider())
