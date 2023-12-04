@@ -1,6 +1,7 @@
 package com.example.springSecurity.config;
 
 import com.example.springSecurity.service.UserDetailSvc;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class SpringSecurity {
 
     private UserDetailSvc userDetailSvc;
@@ -34,7 +35,7 @@ public class SpringSecurity {
                 .csrf(AbstractHttpConfigurer::disable)
 
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/welcome").permitAll()
+                        .requestMatchers("/welcome","/users").permitAll()
 
                         .requestMatchers("/user/**").hasAnyAuthority("ROLE_USER")
                         .requestMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")

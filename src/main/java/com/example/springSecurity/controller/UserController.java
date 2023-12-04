@@ -47,9 +47,7 @@ public class UserController {
     @GetMapping("/user/users")
     public ResponseEntity<?> getAllUsers() {
         List<User> users = userRepository.findAll();
-        if (users.isEmpty()) {
-            return new ResponseEntity<>(users, HttpStatus.OK);
-        }
+        if (!users.isEmpty()) return new ResponseEntity<>(users, HttpStatus.OK);
         return new ResponseEntity<>("No users available", HttpStatus.BAD_REQUEST);
     }
 
