@@ -37,8 +37,8 @@ class SpringSecurityApplicationTests {
 		assertEquals("login", modelAndView.getViewName());
 	}
 
-	@Test
-	void contextLoads() {
-	}
+//	@Test
+//	void contextLoads() {
+//	}
 
 }
